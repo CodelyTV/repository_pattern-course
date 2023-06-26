@@ -1,12 +1,13 @@
-import { User } from "../domain/User";
-import { UserRepository } from "../domain/UserRepository";
+import { MariaDBConnection } from "../../shared/infrastructure/MariaDBConnection";
 
 export class UserRegistrar {
-	constructor(private readonly repository: UserRepository) {}
+	constructor(private readonly connection: MariaDBConnection) {}
 
-	register(id: string, email: string, birthdate: Date): void {
-		const user = new User(id, email, birthdate);
+	async register(id: string, email: string, birthdate: Date): Promise<void> {
+		const formattedDate = birthdate.toISOString().slice(0, 19).replace("T", " ");
 
-		this.repository.save(user);
+		const query = `INSERT INTO users (id, email, birthdate) VALUES ('${id}', '${email}', '${formattedDate}')`;
+
+		await this.connection.execute(query);
 	}
 }
