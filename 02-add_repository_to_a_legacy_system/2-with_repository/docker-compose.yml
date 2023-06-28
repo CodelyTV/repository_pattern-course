@@ -1,6 +1,6 @@
 version: '3'
 services:
-  1-without_repository:
+  2-wit_repository:
     image: mariadb:latest
     restart: always
     environment:
