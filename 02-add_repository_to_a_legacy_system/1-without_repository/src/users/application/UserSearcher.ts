@@ -7,14 +7,12 @@ export class UserSearcher {
 	async search(id: string): Promise<User | null> {
 		const query = `SELECT * FROM users WHERE id='${id}'`;
 
-		const result = await this.connection.searchOne<{ id: string; email: string; birthdate: Date }>(
-			query
-		);
+		const result = await this.connection.searchOne<{ id: string; email: string }>(query);
 
 		if (!result) {
 			return null;
 		}
 
-		return new User(result.id, result.email, new Date(result.birthdate));
+		return new User(result.id, result.email);
 	}
 }
