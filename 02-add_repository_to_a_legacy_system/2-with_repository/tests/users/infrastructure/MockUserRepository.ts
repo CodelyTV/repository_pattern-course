@@ -13,7 +13,7 @@ export class MockUserRepository implements UserRepository {
 	async search(id: UserId): Promise<User | null> {
 		expect(this.mockSearch).toHaveBeenCalledWith(id);
 
-		return (await Promise.resolve(this.mockSearch())) as Promise<User | null>;
+		return this.mockSearch() as Promise<User | null>;
 	}
 
 	shouldSave(user: User): void {

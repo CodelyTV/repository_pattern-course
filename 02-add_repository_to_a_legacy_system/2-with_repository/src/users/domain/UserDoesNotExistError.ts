@@ -1,7 +1,7 @@
 export class UserDoesNotExistError extends Error {
-	message = `The user ${this.email} does not exist`;
+	message = `The user ${this.id} does not exist`;
 
-	constructor(readonly email: string) {
+	constructor(readonly id: string) {
 		super();
 	}
 }
