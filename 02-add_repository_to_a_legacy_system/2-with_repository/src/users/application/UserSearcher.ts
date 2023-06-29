@@ -1,18 +1,11 @@
-import { MariaDBConnection } from "../../shared/infrastructure/MariaDBConnection";
 import { User } from "../domain/User";
+import { UserId } from "../domain/UserId";
+import { UserRepository } from "../domain/UserRepository";
 
 export class UserSearcher {
-	constructor(private readonly connection: MariaDBConnection) {}
+	constructor(private readonly repository: UserRepository) {}
 
 	async search(id: string): Promise<User | null> {
-		const query = `SELECT * FROM users WHERE id='${id}'`;
-
-		const result = await this.connection.searchOne<{ id: string; email: string }>(query);
-
-		if (!result) {
-			return null;
-		}
-
-		return new User(result.id, result.email);
+		return await this.repository.search(new UserId(id));
 	}
 }
