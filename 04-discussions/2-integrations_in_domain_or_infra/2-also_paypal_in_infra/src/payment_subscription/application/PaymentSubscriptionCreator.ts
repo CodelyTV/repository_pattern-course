@@ -4,10 +4,17 @@ import { PaymentSubscriptionRepository } from "../domain/PaymentSubscriptionRepo
 export class PaymentSubscriptionCreator {
 	constructor(private readonly repository: PaymentSubscriptionRepository) {}
 
-	async create(id: string, token: string, email: string): Promise<void> {
-		const name = this.extractNameFromToken(token);
+	async create(
+		id?: string,
+		productId?: string,
+		token?: string,
+		email?: string,
+		name?: string
+	): Promise<void> {
+		const userName = token !== undefined ? this.extractNameFromToken(token) : name!;
+		const goodId = id !== undefined ? id : productId!;
 
-		const subscription = new PaymentSubscription(id, token, email, name);
+		const subscription = new PaymentSubscription(goodId, email!, userName, token);
 
 		await this.repository.create(subscription);
 	}
