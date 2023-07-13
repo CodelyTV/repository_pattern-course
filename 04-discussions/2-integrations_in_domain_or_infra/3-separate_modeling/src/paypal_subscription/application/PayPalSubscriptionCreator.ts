@@ -8,5 +8,6 @@ export class PayPalSubscriptionCreator {
 		const subscription = new PayPalSubscription(id, email, name);
 
 		await this.repository.create(subscription);
+		// await this.eventBus.publish(subscription.pullDomainEvents());
 	}
 }

@@ -10,6 +10,7 @@ export class StripeSubscriptionCreator {
 		const subscription = new StripeSubscription(id, token, email, name);
 
 		await this.repository.create(subscription);
+		// await this.eventBus.publish(subscription.pullDomainEvents());
 	}
 
 	private extractNameFromToken(token: string): string {
