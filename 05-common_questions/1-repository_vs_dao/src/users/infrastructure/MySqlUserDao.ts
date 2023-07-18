@@ -2,7 +2,7 @@ import { MariaDBConnection } from "../../shared/infrastructure/MariaDBConnection
 import { User } from "../domain/User";
 import { UserDAO } from "../domain/UserDAO";
 
-export class MySqlUserDAO implements UserDAO {
+export class MySqlUserDao implements UserDAO {
 	constructor(private readonly connection: MariaDBConnection) {}
 
 	async save(user: User): Promise<void> {
@@ -12,7 +12,7 @@ export class MySqlUserDAO implements UserDAO {
 	}
 
 	async update(user: User, params: Map<string, string>): Promise<void> {
-		const paramsToUpdate = Array.from(params.entries());
+		const paramsToUpdate = this.paramsToSetFormat(params);
 
 		const query = `UPDATE users SET ${paramsToUpdate.toString()} WHERE id ('${user.id.value}')`;
 
@@ -35,5 +35,10 @@ export class MySqlUserDAO implements UserDAO {
 		const query = `DELETE FROM users WHERE id ('${user.id.value}')`;
 
 		await this.connection.execute(query);
+	}
+
+	private paramsToSetFormat(params: Map<string, string>) {
+		// @todo
+		return Array.from(params.entries());
 	}
 }
