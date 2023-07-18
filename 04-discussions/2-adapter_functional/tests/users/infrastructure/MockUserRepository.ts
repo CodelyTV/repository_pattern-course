@@ -1,8 +1,7 @@
 import { User } from "../../../src/users/domain/User";
 import { UserId } from "../../../src/users/domain/UserId";
-import { UserRepository } from "../../../src/users/domain/UserRepository";
 
-export class MockUserRepository implements UserRepository {
+export class MockUserRepository {
 	private readonly mockSave = jest.fn();
 	private readonly mockSearch = jest.fn();
 

@@ -10,7 +10,7 @@ const validId = v4();
 describe("UserRegistrar", () => {
 	it("registers a user without throwing errors when all data is valid", async () => {
 		const repository = new MockUserRepository();
-		const userRegistrar = new UserRegistrar(repository);
+		const userRegistrar = new UserRegistrar(repository.save.bind(repository));
 
 		const expectedUser = new User(validId, validEmail);
 

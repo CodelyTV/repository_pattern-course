@@ -21,6 +21,23 @@ describe("UserFinder", () => {
 		expect(await finder.search(expectedUser.id.value)).toStrictEqual(expectedUser);
 	});
 
+	it("search an existing user without classes", async () => {
+		const mockSearch = jest.fn();
+
+		const finder = new UserFinder((id: UserId) => {
+			expect(mockSearch).toHaveBeenCalledWith(id);
+
+			return mockSearch() as Promise<User | null>;
+		});
+
+		const expectedUser = new User(validId, validEmail);
+
+		mockSearch(expectedUser.id);
+		mockSearch.mockReturnValueOnce(expectedUser);
+
+		expect(await finder.search(expectedUser.id.value)).toStrictEqual(expectedUser);
+	});
+
 	it("throw an error when a user does not exist", async () => {
 		const repository = new MockUserRepository();
 		const finder = new UserFinder((id: UserId) => repository.search(id));
