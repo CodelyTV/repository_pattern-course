@@ -4,7 +4,7 @@ import { UserAlreadyExist } from "./UserAlreadyExist";
 import { UserDoesNotExistError } from "./UserDoesNotExistError";
 import { UserId } from "./UserId";
 
-export interface UserRepository {
+export interface UserWithErrorsRepository {
 	save(user: User): Promise<Either<never, UserAlreadyExist>>;
 
 	search(id: UserId): Promise<User | null>;
