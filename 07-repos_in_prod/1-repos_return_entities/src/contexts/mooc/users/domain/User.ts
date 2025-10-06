@@ -4,6 +4,7 @@ import { AggregateRoot } from "../../../shared/domain/AggregateRoot";
 
 import { UserBio } from "./UserBio";
 import { UserEmail } from "./UserEmail";
+import { UserEmailChangedDomainEvent } from "./UserEmailChangedDomainEvent";
 import { UserId } from "./UserId";
 import { UserName } from "./UserName";
 import { UserRegisteredDomainEvent } from "./UserRegisteredDomainEvent";
@@ -57,5 +58,11 @@ export class User extends AggregateRoot {
 
 	updateSuggestedCourses(suggestedCourses: string): void {
 		this.suggestedCourses = suggestedCourses;
+	}
+
+	changeEmail(newEmail: string): void {
+		this.email = new UserEmail(newEmail);
+
+		this.record(new UserEmailChangedDomainEvent(this.id.value, newEmail));
 	}
 }
