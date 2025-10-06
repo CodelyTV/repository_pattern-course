@@ -18,9 +18,9 @@ import { PostgresInvoiceRepository } from "../../../mooc/invoices/infrastructure
 import { UserCourseProgressCompleter } from "../../../mooc/user-course-progress/application/complete/UserCourseProgressCompleter";
 import { GenerateUserCourseSuggestionsOnUserCourseProgressCompleted } from "../../../mooc/user-course-suggestions/application/generate/GenerateUserCourseSuggestionsOnUserCourseProgressCompleted";
 import { UserCourseSuggestionsGenerator } from "../../../mooc/user-course-suggestions/application/generate/UserCourseSuggestionsGenerator";
-import { CourseSuggestionsGenerator } from "../../../mooc/user-course-suggestions/domain/CourseSuggestionsGenerator";
+import { CourseSuggestionsGeneratorGateway } from "../../../mooc/user-course-suggestions/domain/CourseSuggestionsGeneratorGateway";
 import { UserCourseSuggestionsRepository } from "../../../mooc/user-course-suggestions/domain/UserCourseSuggestionsRepository";
-import { OllamaCourseSuggestionsGenerator } from "../../../mooc/user-course-suggestions/infrastructure/OllamaCourseSuggestionsGenerator";
+import { OllamaCourseSuggestionsGeneratorGateway } from "../../../mooc/user-course-suggestions/infrastructure/OllamaCourseSuggestionsGeneratorGateway";
 import { PostgresUserCourseSuggestionsRepository } from "../../../mooc/user-course-suggestions/infrastructure/PostgresUserCourseSuggestionsRepository";
 import { UserFinder } from "../../../mooc/users/application/find/UserFinder";
 import { UserRegistrar } from "../../../mooc/users/application/registrar/UserRegistrar";
@@ -67,9 +67,9 @@ builder.registerAndUse(UserCourseSuggestionsUpdater);
 
 // UserCourseSuggestions
 builder
-	.register(CourseSuggestionsGenerator)
-	.use(OllamaCourseSuggestionsGenerator);
-builder.registerAndUse(OllamaCourseSuggestionsGenerator);
+	.register(CourseSuggestionsGeneratorGateway)
+	.use(OllamaCourseSuggestionsGeneratorGateway);
+builder.registerAndUse(OllamaCourseSuggestionsGeneratorGateway);
 builder
 	.register(UserCourseSuggestionsRepository)
 	.use(PostgresUserCourseSuggestionsRepository);

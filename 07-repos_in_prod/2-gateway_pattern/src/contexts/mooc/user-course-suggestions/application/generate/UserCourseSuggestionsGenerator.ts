@@ -2,7 +2,7 @@ import { Service } from "diod";
 
 import { EventBus } from "../../../../shared/domain/event/EventBus";
 import { UserId } from "../../../users/domain/UserId";
-import { CourseSuggestionsGenerator } from "../../domain/CourseSuggestionsGenerator";
+import { CourseSuggestionsGeneratorGateway } from "../../domain/CourseSuggestionsGeneratorGateway";
 import { UserCourseSuggestions } from "../../domain/UserCourseSuggestions";
 import { UserCourseSuggestionsRepository } from "../../domain/UserCourseSuggestionsRepository";
 
@@ -10,7 +10,7 @@ import { UserCourseSuggestionsRepository } from "../../domain/UserCourseSuggesti
 export class UserCourseSuggestionsGenerator {
 	constructor(
 		private readonly repository: UserCourseSuggestionsRepository,
-		private readonly generator: CourseSuggestionsGenerator,
+		private readonly generator: CourseSuggestionsGeneratorGateway,
 		private readonly eventBus: EventBus,
 	) {}
 

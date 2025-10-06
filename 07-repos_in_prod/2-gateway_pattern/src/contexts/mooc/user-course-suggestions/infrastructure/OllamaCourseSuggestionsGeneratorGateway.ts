@@ -14,12 +14,12 @@ import { Course } from "../../courses/domain/Course";
 import { CourseId } from "../../courses/domain/CourseId";
 import { CourseRepository } from "../../courses/domain/CourseRepository";
 import { CourseSuggestion } from "../domain/CourseSuggestion";
-import { CourseSuggestionsGenerator } from "../domain/CourseSuggestionsGenerator";
+import { CourseSuggestionsGeneratorGateway } from "../domain/CourseSuggestionsGeneratorGateway";
 import { UserCourseSuggestions } from "../domain/UserCourseSuggestions";
 
 @Service()
-export class OllamaCourseSuggestionsGenerator
-	implements CourseSuggestionsGenerator
+export class OllamaCourseSuggestionsGeneratorGateway
+	implements CourseSuggestionsGeneratorGateway
 {
 	constructor(private readonly courseRepository: CourseRepository) {}
 
